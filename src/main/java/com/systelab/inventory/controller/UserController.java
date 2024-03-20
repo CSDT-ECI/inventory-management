@@ -1,11 +1,13 @@
 package com.systelab.inventory.controller;
 
+import com.systelab.inventory.model.*;
 import com.systelab.inventory.Constants;
 import com.systelab.inventory.config.TokenProvider;
 import com.systelab.inventory.repository.UserRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,9 +19,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.PermitAll;
 
-@Api(tags = {"User Entity"})
+@Api(tags = { "User Entity" })
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders="*", exposedHeaders = "Authorization", allowCredentials = "true")
+@CrossOrigin(origins = "*", allowedHeaders = "*", exposedHeaders = "Authorization", allowCredentials = "true")
 @RequestMapping(value = "/api/users", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
 
@@ -38,9 +40,18 @@ public class UserController {
     @ApiOperation(value = "User Login", notes = "")
     @PostMapping(value = "/login", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     @PermitAll
-    public ResponseEntity authenticateUser(@RequestParam("login") String login, @RequestParam("password") String password) throws SecurityException {
+    public ResponseEntity authenticateUser(@RequestParam("login") String login,
+            @RequestParam("password") String password) throws SecurityException {
+        // Verificar si el usuario existe
+        User user = userRepository.findByUsername(login);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // Usuario no encontrado, devolver error de
+                                                                           // autenticación
+        }
+        // El usuario existe, intentar autenticarlo
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(login, password));
+        // Si la autenticación tiene éxito, generar un token
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final String token = jwtTokenUtil.generateToken(authentication);
         return ResponseEntity.ok().header(Constants.HEADER_STRING, "Bearer " + token).build();
