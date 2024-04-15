@@ -22,11 +22,14 @@ jobs:
         
     - name: Step 3 - Build with Maven
       run: mvn clean install
+
+    - name: Step 4 - Run tests
+      run: mvn test
       
-    - name: Step 4 -List the current directory
+    - name: Step 5 -List the current directory
       run: ls -a
 
-    - name: Step 5 -what is in the target folder?
+    - name: Step 6 -what is in the target folder?
       run: |
         cd target 
         ls -a
