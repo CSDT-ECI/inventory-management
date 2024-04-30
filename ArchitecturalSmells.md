@@ -7,7 +7,7 @@ Un "Architectural Smell" es un término utilizado en ingeniería de software par
 
 ## Smells
 
-> [!PACKAGE]
+> [!NOTE]
 > com.systelab.inventory.controller
 
 ### UserController 
@@ -16,6 +16,9 @@ Un "Architectural Smell" es un término utilizado en ingeniería de software par
 **Unstable Dependency:** El UserController depende de UserRepository, AuthenticationManager, TokenProvider y BCryptPasswordEncoder. Si estas clases o interfaces cambian frecuentemente, esto podría ser un problema. 
 
 ### Item
+
+> [!NOTE]
+> com.systelab.inventory.model
 
 **Ambiguous Interface:** El método clearQuarantineInfo podría ser confuso si no se entiende el contexto de cuarentena. Un nombre más descriptivo podría ser resetQuarantineInfo.
 
@@ -30,6 +33,10 @@ Un "Architectural Smell" es un término utilizado en ingeniería de software par
 ```
 
 ### Product
+
+> [!NOTE]
+> com.systelab.inventory.model
+
 
 **Insufficient Modularization:** Product parece tener muchas responsabilidades, ya que maneja una gran cantidad de atributos. Podría ser útil dividir esta clase en varias clases más pequeñas, cada una con su propia responsabilidad.
 
