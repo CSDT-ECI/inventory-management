@@ -7,7 +7,11 @@ Un "Architectural Smell" es un término utilizado en ingeniería de software par
 
 ## Smells
 
+> [!PACKAGE]
+> com.systelab.inventory.controller
+
 ### UserController 
+
 
 **Unstable Dependency:** El UserController depende de UserRepository, AuthenticationManager, TokenProvider y BCryptPasswordEncoder. Si estas clases o interfaces cambian frecuentemente, esto podría ser un problema. 
 
