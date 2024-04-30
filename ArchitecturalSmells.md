@@ -9,7 +9,7 @@ Un "Architectural Smell" es un término utilizado en ingeniería de software par
 
 ### UserController 
 
-**Unstable Dependency:** El UserController depende de UserRepository, AuthenticationManager, TokenProvider y BCryptPasswordEncoder. Si estas clases o interfaces cambian frecuentemente, esto podría ser un problema. Sin embargo, esto es bastante común en la arquitectura de Spring y generalmente no se considera un problema a menos que las implementaciones cambien con frecuencia.
+**Unstable Dependency:** El UserController depende de UserRepository, AuthenticationManager, TokenProvider y BCryptPasswordEncoder. Si estas clases o interfaces cambian frecuentemente, esto podría ser un problema. 
 
 ### Item
 
