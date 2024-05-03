@@ -80,3 +80,5 @@ The app will be available at http://localhost:8080/swagger-ui.html
 
 
 Check http://www.baeldung.com/jackson-annotations for JSON annotations
+
+GitHub Pages: https://csdt-eci.github.io/inventory-management/
